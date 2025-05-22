@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Image from 'next/image';
@@ -11,7 +11,7 @@ function WeatherPage() {
   const [loading, setLoading] = useState(true);
 
   // Function to fetch weather data from API
-  async function getWeatherData() {
+  const getWeatherData = useCallback(async () => {
     setLoading(true);
     // Updated API call to include forecast data
     const url = `https://api.weatherapi.com/v1/forecast.json?key=f308a557091345e3a1353833230708&q=${city}&days=5&aqi=no&alerts=no`;
@@ -25,7 +25,8 @@ function WeatherPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [city]);
+
   const fetchLocationWeather = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
