@@ -1,3 +1,5 @@
+'use client';
+
 import { SignUp } from "@clerk/nextjs";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
