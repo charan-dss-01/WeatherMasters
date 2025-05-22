@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Image from 'next/image';
 
 function WeatherPage() {
   // State for API integration
@@ -44,7 +45,7 @@ function WeatherPage() {
   // Fetch data when component mounts or city changes
   useEffect(() => {
     getWeatherData();
-  }, [city]);
+  }, [city, getWeatherData]);
 
   // Helper function to get appropriate weather icon
   const getWeatherIcon = (code: number) => {
@@ -138,9 +139,11 @@ function WeatherPage() {
               
               <div className="text-9xl text-orange-500 mt-6 md:mt-0">
                 {data.current.condition.icon && (
-                  <img 
+                  <Image 
                     src={data.current.condition.icon.replace('64x64', '128x128')} 
                     alt="weather icon" 
+                    width={128}
+                    height={128}
                     className="w-32 h-32" 
                   />
                 )}
@@ -231,9 +234,11 @@ function WeatherPage() {
                       {index === 0 ? 'Today' : formatDay(day.date)}
                     </div>
                     <div className="flex justify-center mb-2">
-                      <img 
+                      <Image 
                         src={day.day.condition.icon} 
                         alt={day.day.condition.text}
+                        width={64}
+                        height={64}
                         className="w-16 h-16" 
                       />
                     </div>

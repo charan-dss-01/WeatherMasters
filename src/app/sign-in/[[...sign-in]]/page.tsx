@@ -125,7 +125,7 @@ export default function Page() {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white">
             <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-              Weather Master's
+              Weather Master&apos;s
             </span>
           </h1>
           <p className="mt-2 text-gray-300">Sign in to your account</p>
