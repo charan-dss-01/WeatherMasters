@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+  }
+
+  .dark {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
@@ -24,4 +24,68 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+/* Clerk User Button Dropdown Enhanced Styles */
+.cl-userButtonPopoverCard {
+  background-color: #1f2937 !important;
+  border: 1px solid #374151 !important;
+  color: white !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.cl-userButtonPopoverActionButton, 
+.cl-userButtonPopoverActionButtonText,
+.cl-userButtonPopoverActionButtonIcon {
+  color: white !important;
+}
+
+.cl-userButtonPopoverActionButton:hover {
+  background-color: #374151 !important;
+}
+
+.cl-userButtonPopoverFooter {
+  border-color: #374151 !important;
+}
+
+.cl-userButtonPopoverActionButtonIconBox {
+  background-color: rgba(249, 115, 22, 0.2) !important;
+}
+
+.cl-userButtonTrigger {
+  filter: brightness(1.2) !important;
+}
+
+/* Ensure manage account text is visible */
+.cl-userButtonPopoverActionButtonArrow,
+.cl-userButtonPopoverActionButtonIcon svg path {
+  fill: white !important;
+  stroke: white !important;
+}
+
+/* Make all account management options visible */
+.cl-userButtonPopoverMain,
+.cl-userButtonPopoverHeader,
+.cl-userButtonPopoverActions,
+.cl-userButtonPopoverSecondaryActions,
+.cl-userButtonPopoverManageAccountLink,
+.cl-userButtonPopoverCard div,
+.cl-userButtonPopoverCard p,
+.cl-userButtonPopoverCard span {
+  color: white !important;
+}
+
+/* Profile details */
+.cl-profileSectionPrimaryButton,
+.cl-profileSectionTitle,
+.cl-profileSectionContent,
+.cl-profileSectionContent div,
+.cl-profileSectionContent p,
+.cl-profileSectionContent span {
+  color: white !important;
+}
+
+/* Manage link */
+.cl-userButtonPopoverManageAccountLink {
+  color: #f97316 !important;
 }

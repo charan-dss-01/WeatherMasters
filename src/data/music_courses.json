@@ -1,0 +1,108 @@
+{
+  "skills": [
+    {
+      "id": 1,
+      "title": "C Programming",
+      "slug": "c-programming",
+      "description": "Proficient in C programming language.",
+      "image": "/assets/c2.png",
+      "isFeatured": true
+    },
+    {
+      "id": 2,
+      "title": "C++ Programming",
+      "slug": "c-plus-plus-programming",
+      "description": "Experienced in C++ programming language.",
+      "image": "/assets/c++2.png",
+      "isFeatured": true
+    },
+    {
+      "id": 3,
+      "title": "Java",
+      "slug": "java",
+      "description": "Skilled in Java programming language.",
+      "image": "/assets/java.png",
+      "isFeatured": true
+    },
+    {
+      "id": 4,
+      "title": "Python",
+      "slug": "python",
+      "description": "Proficient in Python programming language.",
+      "image": "/assets/python2.png",
+      "isFeatured": true
+    },
+    {
+      "id": 5,
+      "title": "HTML",
+      "slug": "html",
+      "description": "Skilled in HTML for web development.",
+      "image": "/assets/html.png",
+      "isFeatured": true
+    },
+    {
+      "id": 6,
+      "title": "CSS",
+      "slug": "css",
+      "description": "Proficient in CSS for styling web pages.",
+      "image": "/assets/css.png",
+      "isFeatured": true
+    },
+    {
+      "id": 7,
+      "title": "JavaScript",
+      "slug": "javascript",
+      "description": "Skilled in JavaScript for frontend development.",
+      "image": "/assets/javascript.png",
+      "isFeatured": true
+    },
+    {
+      "id": 8,
+      "title": "Flask",
+      "slug": "flask",
+      "description": "Experienced in Flask web framework.",
+      "image": "/assets/flask2.png",
+      "isFeatured": true
+    },
+    {
+      "id": 9,
+      "title": "MySQL",
+      "slug": "mysql",
+      "description": "Skilled in MySQL database administration.",
+      "image": "/assets/mysql.png",
+      "isFeatured": true
+    },
+    {
+      "id": 10,
+      "title": "SQLite3",
+      "slug": "sqlite3",
+      "description": "Proficient in SQLite3 database management.",
+      "image": "/assets/sqlite3.png",
+      "isFeatured": true
+    },
+    {
+      "id": 11,
+      "title": "React",
+      "slug": "react",
+      "description": "Skilled in React library for frontend development.",
+      "image": "/assets/react2.png",
+      "isFeatured": true
+    },
+    {
+      "id": 12,
+      "title": "Bootstrap",
+      "slug": "bootstrap",
+      "description": "Experienced in Bootstrap framework.",
+      "image": "/assets/bootstarp.png",
+      "isFeatured": true
+    },
+    {
+      "id": 13,
+      "title": "Tailwind CSS",
+      "slug": "tailwind-css",
+      "description": "Experienced in Tailwind CSS framework.",
+      "image": "/assets/tailwind.png",
+      "isFeatured": true
+    }
+  ]
+}
