@@ -10,6 +10,16 @@ const nextConfig = {
       },
     ],
   },
+  // Enable static optimization
+  output: 'standalone',
+  // Disable telemetry
+  telemetry: {
+    disabled: true,
+  },
+  // Enable strict mode
+  reactStrictMode: true,
+  // Enable production source maps
+  productionBrowserSourceMaps: true,
 }
 
 module.exports = nextConfig

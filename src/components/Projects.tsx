@@ -92,8 +92,9 @@ const projects: Project[] = [
     },
 ];
 
-function page() {
+function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [active, setActive] = useState<string | null>(null);
 
   return (
     <div className='bg-black min-h-screen py-12 pt-36'>
@@ -234,4 +235,4 @@ function page() {
   )
 }
 
-export default page
+export default Projects
