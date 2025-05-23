@@ -83,7 +83,7 @@ export default function Contact() {
                 <TypewriterEffectSmooth words={words} className="text-4xl md:text-5xl font-extrabold text-white text-center mb-12" />
                 </div>
                 
-                <div className="flex flex-col md:flex-row gap-10 justify-center items-start">
+                <div className="flex flex-col-reverse md:flex-row gap-10 justify-center items-start">
                     {/* Contact Info Card */}
                     <div className="w-full md:w-1/3 bg-zinc-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-zinc-800">
                         <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
