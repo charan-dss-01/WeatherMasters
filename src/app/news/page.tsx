@@ -2,21 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Link from 'next/link';
+import { fetchNews } from '@/services/newsService';
+import { NewsResponse } from '@/types/news';
 
 function NewsPage() {
-  // Sample news articles
-  const [data, setData]:any = useState([]);
+  const [data, setData] = useState<NewsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [email, setEmail] = useState('');
 
   const fetchData = async () => {
     try {
-      const response = await fetch('https://newsapi.org/v2/everything?sources=the-times-of-india&q=weather&sortBy=publishedAt&apiKey=95fe113873824099bfdd205718cdaf46');
-      const data = await response.json();
-      setData(data);
+      const newsData = await fetchNews('weather');
+      setData(newsData);
       setLoading(false);
-      console.log(data);
     } catch (error) {
       console.error('Error fetching articles:', error);
       setLoading(false);
@@ -82,48 +81,8 @@ function NewsPage() {
     );
   }
 
-  // const articles = [
-  //   {
-  //     id: 1,
-  //     title: 'Record-Breaking Heat Wave Expected This Weekend',
-  //     excerpt: 'Meteorologists predict temperatures to reach 40°C in several regions, breaking previous records set in 2018.',
-  //     date: 'July 12, 2023',
-  //     category: 'Alert',
-  //     image: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?q=80&w=400&auto=format&fit=crop'
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'New Satellite Technology Improving Weather Predictions',
-  //     excerpt: 'Advanced satellite systems launched last month are already providing more accurate data for forecasting models.',
-  //     date: 'July 8, 2023',
-  //     category: 'Technology',
-  //     image: 'https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=400&auto=format&fit=crop'
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Hurricane Season Forecast: What to Expect This Year',
-  //     excerpt: 'Experts predict an above-average hurricane season with potentially 15-20 named storms in the Atlantic.',
-  //     date: 'June 28, 2023',
-  //     category: 'Forecast',
-  //     image: 'https://images.unsplash.com/photo-1527482797697-8795b05a13fe?q=80&w=400&auto=format&fit=crop'
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'Climate Change Impact on Local Weather Patterns',
-  //     excerpt: 'New study reveals how climate change is altering seasonal weather patterns across multiple regions.',
-  //     date: 'June 20, 2023',
-  //     category: 'Research',
-  //     image: 'https://images.unsplash.com/photo-1593978301851-40c1849d47d4?q=80&w=400&auto=format&fit=crop'
-  //   },
-  //   {
-  //     id: 5,
-  //     title: 'Preparing for Summer Storms: Expert Tips',
-  //     excerpt: 'Weather safety experts share their top recommendations for staying safe during severe summer weather.',
-  //     date: 'June 15, 2023',
-  //     category: 'Safety',
-  //     image: 'https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?q=80&w=400&auto=format&fit=crop'
-  //   }
-  // ];
+  const featuredArticle = data?.articles[0];
+  const remainingArticles = data?.articles.slice(1) || [];
 
   return (
     <div className="min-h-screen bg-black text-white pt-32 pb-20 px-4">
@@ -139,39 +98,43 @@ function NewsPage() {
         </div>
         
         {/* Featured article */}
-        <div className="relative rounded-xl overflow-hidden mb-12 group cursor-pointer hover:shadow-2xl transition-all duration-300">
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10"></div>
-          <img 
-            src={data?.articles[0]?.urlToImage} 
-            alt={data?.articles[0]?.title}
-            className="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute bottom-0 left-0 p-8 z-20 max-w-3xl">
-            <div className="bg-orange-500 text-white text-xs px-3 py-1.5 rounded-full mb-4 font-medium">
-              {data?.articles[0]?.source?.name}
-            </div>
-            <h2 className="text-4xl font-bold mb-4 leading-tight">{data?.articles[0]?.title}</h2>
-            <p className="text-gray-200 mb-4 text-lg">{data?.articles[0]?.description}</p>
-            <div className="flex items-center justify-between">
-              <span className="text-gray-300 text-sm">{new Date(data?.articles[0]?.publishedAt).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}</span>
-              <Link href={data?.articles[0]?.url} className="text-white bg-orange-500 hover:bg-orange-600 px-6 py-2.5 rounded-lg flex items-center gap-2 transition-colors duration-300">
-                Read More <i className="fa-solid fa-arrow-right"></i>
-              </Link>
+        {featuredArticle && (
+          <div className="relative rounded-xl overflow-hidden mb-12 group cursor-pointer hover:shadow-2xl transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10"></div>
+            <img 
+              src={featuredArticle.urlToImage || '/placeholder-image.jpg'} 
+              alt={featuredArticle.title}
+              className="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute bottom-0 left-0 p-8 z-20 max-w-3xl">
+              <div className="bg-orange-500 text-white text-xs px-3 py-1.5 rounded-full mb-4 font-medium">
+                {featuredArticle.source.name}
+              </div>
+              <h2 className="text-4xl font-bold mb-4 leading-tight">{featuredArticle.title}</h2>
+              <p className="text-gray-200 mb-4 text-lg">{featuredArticle.description}</p>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-300 text-sm">
+                  {new Date(featuredArticle.publishedAt).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </span>
+                <Link href={featuredArticle.url} className="text-white bg-orange-500 hover:bg-orange-600 px-6 py-2.5 rounded-lg flex items-center gap-2 transition-colors duration-300">
+                  Read More <i className="fa-solid fa-arrow-right"></i>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         
         {/* News grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data?.articles?.slice(1).map((article:any, index:number) => (
+          {remainingArticles.map((article, index) => (
             <div key={index} className="bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300">
               <div className="relative h-56 overflow-hidden">
                 <img 
-                  src={article.urlToImage} 
+                  src={article.urlToImage || '/placeholder-image.jpg'} 
                   alt={article.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -189,11 +152,13 @@ function NewsPage() {
                   {article.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-500 text-sm">{new Date(article.publishedAt).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                  })}</span>
+                  <span className="text-gray-500 text-sm">
+                    {new Date(article.publishedAt).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </span>
                   <Link href={article.url} className="text-orange-500 text-sm font-medium hover:text-orange-400 transition-colors">
                     Read more <i className="fa-solid fa-arrow-right ml-1"></i>
                   </Link>
