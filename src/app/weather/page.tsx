@@ -87,7 +87,7 @@ function WeatherPage() {
         {/* Search box - moved to top */}
         <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 mb-8">
           <h3 className="text-xl font-bold mb-4">Search Weather by Location</h3>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-col md:flex-row">
             <input 
               type="text" 
               placeholder="Enter city name..." 
@@ -95,6 +95,7 @@ function WeatherPage() {
               onChange={(e) => setCity(e.target.value)}
               className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
+            <div className="flex gap-2 mt-3 md:mt-0">
             <button 
               className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg"
               onClick={getWeatherData}
@@ -107,6 +108,7 @@ function WeatherPage() {
             >
               Use My Location
             </button>
+            </div>
           </div>
         </div>
         
