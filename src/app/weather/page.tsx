@@ -140,7 +140,7 @@ function WeatherPage() {
               
               <div className="text-9xl text-orange-500 mt-6 md:mt-0">
                 {data.current.condition.icon && (
-                  <Image 
+                  <img 
                     src={data.current.condition.icon.replace('64x64', '128x128')} 
                     alt="weather icon" 
                     width={128}
@@ -235,7 +235,7 @@ function WeatherPage() {
                       {index === 0 ? 'Today' : formatDay(day.date)}
                     </div>
                     <div className="flex justify-center mb-2">
-                      <Image 
+                      <img
                         src={day.day.condition.icon} 
                         alt={day.day.condition.text}
                         width={64}
