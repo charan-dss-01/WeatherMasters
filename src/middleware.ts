@@ -1,25 +1,18 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-// Simple middleware to check authentication state and redirect
-export function middleware(request: NextRequest) {
-  // Get auth status from clerk-specific header
-  const isAuthenticated = !!request.cookies.get("__clerk_session");
-  const url = request.nextUrl.clone();
-  
-  // If user is authenticated and on the home page, redirect to weather
-  if (isAuthenticated && url.pathname === "/") {
-    url.pathname = "/weather";
-    return NextResponse.redirect(url);
+const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)','/'])
+
+export default clerkMiddleware(async (auth, req) => {
+  if (!isPublicRoute(req)) {
+    await auth.protect()
   }
-  
-  // Otherwise, continue
-  return NextResponse.next();
-}
+})
 
 export const config = {
   matcher: [
-    // Match only the home page for this redirect
-    "/"
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
-};
+}

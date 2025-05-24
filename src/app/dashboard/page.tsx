@@ -161,7 +161,7 @@ const WeatherDashboard = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
           <h1 className="text-4xl font-bold text-orange-500">Weather Dashboard</h1>
-          <form onSubmit={handleSearch} className="w-full md:w-auto flex gap-2">
+          <form onSubmit={handleSearch} className="w-full md:w-auto flex gap-2 flex-col md:flex-row">
             <input
               type="text"
               value={searchQuery}
@@ -169,18 +169,20 @@ const WeatherDashboard = () => {
               placeholder="Enter city name..."
               className="flex-1 bg-gray-800 text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
-            <button
-              type="submit"
-              className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
-            >
-              Search
-            </button>
-            <button 
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
-              onClick={fetchLocationWeather}
-            >
-              Use My Location
-            </button>
+            <div className="flex gap-2 mt-3 md:mt-0">
+              <button
+                type="submit"
+                className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Search
+              </button>
+              <button 
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                onClick={fetchLocationWeather}
+              >
+                Use My Location
+              </button>
+            </div>
           </form>
         </div>
 
